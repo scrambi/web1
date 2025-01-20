@@ -1,0 +1,101 @@
+# Default values for python-web-app.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: web_app
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: v0.0.2
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: false
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+# Можно попробовать протестить. В идеале бы включить. На питоновском приложении не вышло
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 10000
+
+service:
+  type: ClusterIP
+  port: 8000
+
+ingress:
+  enabled: false
+  # className: "nginx"
+  # annotations:
+    # cert-manager.io/cluster-issuer: "ca-cluster-issuer"
+  hosts:
+    - host: python.local.test
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+          servicePort: 80
+  tls:
+   - secretName: python-cert
+     hosts:
+       - python.local.test
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 256Mi
+  requests:
+    cpu: 100m
+    memory: 256Mi
+
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+# affinity:
+#   podAntiAffinity:
+#     preferredDuringSchedulingIgnoredDuringExecution:
+#       - weight: 100
+#         podAffinityTerm:
+#           labelSelector:
+#             matchExpressions:
+#               - key: app.kubernetes.io/fullname
+#                 operator: In
+#                 values:
+#                   # - {{ include "python-web-app.fullname" . }}
+#                   - python-python-web-app
+#           topologyKey: kubernetes.io/hostname
+
+env:
+  # non sensitive variables
+  public:
+    DATABASE_URL: localhost
+    DATABASE_USER: user
+  # sensitive variables
+  secret:
+    DATABASE_PASSWORD: pa$$w0rd
+
+disableProbes: false
+
+config:
+  enabled: false
+  path: /configs

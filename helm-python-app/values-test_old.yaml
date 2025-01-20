@@ -1,0 +1,35 @@
+env:
+    # non sensitive variables
+    public:
+        DATABASE_URL: localhost
+        DATABASE_USER: user
+    # sensitive variables
+    secret:
+        DATABASE_PASSWORD: ENC[AES256_GCM,data:NoSLE6BCo8g=,iv:0V2eD4O6AXAGbb+r4ksoicbNO9QsiQpgPgkZ4Xj+2ZY=,tag:TATPeg8eowhWF+1/N/I5Dg==,type:str]
+        SUPER_SECRET: ENC[AES256_GCM,data:KW5Nhg+ahI7x4sjsZSM2P90=,iv:K000DP36H6hiRjTkaEU48uPQMplF2/mx1OFanNLe1Fs=,tag:Z7w/5ZXbBfCKV4YUpfgbhg==,type:str]
+        data2: ENC[AES256_GCM,data:uFINsted,iv:TwjTEpk1sRLsFsHZ+I6PyH8hRbpaa2SSOOji3tCsP0s=,tag:zJ5AqU3MCwnd5D4kyIuAAw==,type:str]
+replicaCount: 2
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1km0n3lpecy0lm22gqpfg6z32cvs6jc3krfynlxna4h83vlt43c7su4ej3r
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBnUlVvTDgvS1hjelBmSXZa
+            RnpOd3dLWVBGKy9PSHdqSWxtRE9WVG5VbDJzCm1xWVJzdDdmbFo4d09sdm1aMzNW
+            QUMyRWZZcUN4Y2dUWFd0aHNTSFZHM1UKLS0tIHQwYnV5Q0VEZi9qK2JNSmlDU2Zs
+            SWt0L0xkK25kUWdkUndMcmlkOFVwa0UKNjx1wXE/X+QPGcec7dwAiPvvmUaMAheO
+            rrm6CIHpyDep6fMN4gxGjSsAc5M//1jg4Fk8B4xLvH/QOk/NN6HENQ==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2022-07-14T22:48:00Z"
+    mac: ENC[AES256_GCM,data:88WWSYsBUUW0ReBu4WJ98/fsctTOo32qeSpBu26IaD3Fg2wikvtKs/JLUbp2U/j1QBg1z3abVToMK+QNAjWEBQOpqH0uvvn2U70sgyGs61gxVbjQo/r5UKQsKMQttboM9yLJ3HQjgP9OVHlUGRAJqYbc/67FE1k1N27TT9E0/1I=,iv:9Vh65AdasCSoNKzM1LBjBtj7Ifg1/O17MNybl9dvWkw=,tag:yTZta7XS7CpiyuJxoYVUKw==,type:str]
+    pgp: []
+    encrypted_suffix: secret
+    version: 3.7.3
+
+# annotation:
+#   checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+#   checksum/secret: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
