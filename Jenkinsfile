@@ -1,8 +1,5 @@
 pipeline {
     agent any
-    environment {
-        DOCKER_IMAGE = 'scramby/scram:latest' // Используйте созданный репозиторий
-    }
     stages {
         stage('Clone Repository') {
             steps {
@@ -19,7 +16,6 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'docker-credentials', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASSWORD')]) {
                     sh """
                     echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USER" --password-stdin
-                    docker tag scramby/scram $DOCKER_USER/scram:latest
                     docker push $DOCKER_USER/scram:latest
                     """
                 }
