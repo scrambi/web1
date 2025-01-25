@@ -41,8 +41,8 @@ pipeline {
                 script {
                     // Обновляем версию образа в deployment.yaml
                     sh """
-                    sed -i 's|scramby/scram:.*|${DOCKER_IMAGE}:${VERSION}|g' k8s/deployment.yaml
-                    kubectl apply -f k8s/deployment.yaml
+                    sed -i 's|scramby/scram:.*|${DOCKER_IMAGE}:${VERSION}|g' deployment.yaml
+                    kubectl apply -f deployment.yaml
                     """
                 }
             }
