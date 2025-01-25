@@ -43,7 +43,7 @@ pipeline {
                     sh """
                     sed -i 's|scramby/scram:.*|${DOCKER_IMAGE}:${VERSION}|g' deployment.yaml
                     kubectl apply -f deployment.yaml
-                    kubectl apply -f service.yml
+                    kubectl apply -f service.yaml
                     """
                 }
             }
