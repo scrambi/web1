@@ -1,0 +1,35 @@
+env:
+    # non sensitive variables
+    public:
+        DATABASE_URL: localhost
+        DATABASE_USER: user
+    # sensitive variables
+    secret:
+        DATABASE_PASSWORD: E123456Qq
+        SUPER_SECRET: asd
+        data2: 123
+
+replicaCount: 2
+
+
+image:
+  repository: web_app
+  pullPolicy: IfNotPresent
+  tag: v0.0.2
+
+ingress:
+  enabled: true
+  hosts:
+    - host: python.local.test
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+          servicePort: 80
+#   tls:
+#    - secretName: python-cert
+#      hosts:
+#        - python.local.test
+
+config:
+  enabled: true
+  path: /configs

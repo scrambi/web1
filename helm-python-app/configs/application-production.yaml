@@ -1,0 +1,3 @@
+spring:
+  application:
+    datasource-url: "jdbc:postgresql://${DATABASE_URL}/erp_odb?user=${DATABASE_USER}&password=${DATABASE_PASSWORD}"
